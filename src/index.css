@@ -1,0 +1,31 @@
+.buttonStart:hover{
+    background-color: #0F9B8D;
+    transform: scale(1.02);
+}
+.buttonExplore:hover{
+    background-color: #5B7068;
+    transform: scale(1.02);
+}
+.image1:hover{
+    transform: scale(1.02);
+}
+.button2{
+    opacity: 0;
+}
+.image1:hover .button2{
+    opacity: 1;
+}
+
+.image2:hover{
+    transform: scale(1.02);
+}
+.image2:hover .button2{
+    opacity: 1;
+}
+
+.image3:hover{
+    transform: scale(1.02);
+}
+.image3:hover .button2{
+    opacity: 1;
+}

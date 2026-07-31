@@ -11,12 +11,13 @@ import { LuBadgeCheck } from "react-icons/lu";
 import { BsGlobeAmericasFill } from "react-icons/bs";
 import { CiVideoOn } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
-
+import  {useNavigate} from 'react-router-dom'
 
 
 
 
 const LandingPage = () => {
+  const navigate = useNavigate() ;
   return (
     <>
           
@@ -50,7 +51,7 @@ const LandingPage = () => {
         color: "#fff",
         fontSize: "clamp(0.9rem, 2vw, 1.2rem)",
       }}
-    >
+     onClick={() => navigate('/signup')}>
       Get Started
     </button>
   </div>
@@ -73,8 +74,8 @@ const LandingPage = () => {
 </div> 
 <div>
 
-  <h1 className='mt-3 mt-md-3 text-white fw-bolder' style={{fontSize: ' clamp(3rem, 8vw, 6rem)', fontFamily: "'Arial Black', sans-serif", fontWeight: 900,lineHeight: "0.95",
-    letterSpacing: "-2px",}}>Sound that<br /> <span style = {{color:'#0F9B8E',fontSize: ' clamp(3rem, 7vw, 6rem)', fontStyle: 'italic' }} className='fw-bold' > breathes.</span> </h1>
+  <h1 className='mt-3 mt-md-3 text-white fw-bolder' style={{fontSize: ' clamp(3rem, 8vw, 5rem)', fontFamily: "'Arial Black', sans-serif", fontWeight: 900,lineHeight: "0.95",
+    letterSpacing: "-2px",}}>Sound that<br /> <span style = {{color:'#0F9B8E',fontSize: ' clamp(3rem, 7vw, 5rem)', fontStyle: 'italic' }} className='fw-bold' > breathes.</span> </h1>
 </div>
 <div className='mt-md-5'>
   <p className="text-white d-none d-md-block" style={{ fontSize: '1.4rem' }}>
@@ -87,7 +88,7 @@ const LandingPage = () => {
 </p>
 </div>
 <div className='mt-3 mt-md-4 d-flex gap-4 gap-md-4 flex-column flex-md-row'>
-  <button className='btn px-md-5 px-3 py-3  py-md-4 fw-bold text-white fs-6 rounded-4 buttonStart' style= {{backgroundColor: '#0F9B8D'}}>Start Listening Now</button>
+  <button className='btn px-md-5 px-3 py-3  py-md-4 fw-bold text-white fs-6 rounded-4 buttonStart' style= {{backgroundColor: '#0F9B8D'}}  onClick={() => navigate('/signup')}>Start Listening Now</button>
   <button className='btn px-md-5 px-3 py-3  py-md-3 fw-bold text-white fs-6 rounded-4 buttonExplore' style={{backgroundColor: '#162120'}}>Explore (Artist)</button>
 </div>
 </div>
@@ -286,7 +287,7 @@ check</p>
 <p className='d-flex gap-3 align-items-center mb-5 fw-medium'> <FaCheck size={'17'} color={'#74c4bd'}/>   Smart Playlists</p>
 
 
-<button className='w-100 py-3 rounded-4 fw-medium btn mt-5' style={{border:'2px solid #bcc9bc'}}>Get started </button>
+<button className='w-100 py-3 rounded-4 fw-medium btn mt-5' style={{border:'2px solid #bcc9bc'}}  onClick={() => navigate('/signup')}>Get started </button>
 
   
        </div>
@@ -302,7 +303,7 @@ check</p>
 <p className='d-flex gap-3 align-items-center mb-5 fw-medium text-white'> <CiCircleCheck size={'28'} color={'#74c4bd'}/>  Offline Everywhere</p>
 
 
-<button className='w-100 py-3 rounded-4 fw-bold btn  text-white' style={{ backgroundColor: '#0F9B8D'}}>Upgrade to pro</button>
+<button className='w-100 py-3 rounded-4 fw-bold btn  text-white' style={{ backgroundColor: '#0F9B8D'}}  onClick={() => navigate('/signup')}>Upgrade to pro</button>
 
 <div className='position-absolute rounded-5 text-white fw-bold d-flex justify-content-center mx-3 px-4 py-1' style={{backgroundColor: "#0F9B8D",  right: '120px', bottom: '440px'}}>MOST POPULAR</div>
 
@@ -322,7 +323,7 @@ check</p>
 <p className='d-flex gap-3 align-items-center mb-5 fw-medium'> <LuBadgeCheck size={'27'} color={'#74c4bd'}/> Creator Toolkit Access</p>
 
 
-<button className='w-100 py-3 rounded-4 fw-medium btn' style={{border:'2px solid #bcc9bc'}}>Start trial</button>
+<button className='w-100 py-3 rounded-4 fw-medium btn' style={{border:'2px solid #bcc9bc'}}  onClick={() => navigate('/signup')}>Start trial</button>
 
   
        </div>
@@ -337,7 +338,7 @@ you listen?
 </p> 
 <p className='mt-3'style={{color: '#949796'}}>Join the millions of listeners and creators defining the next era of high-fidelity sound.</p>
 <div className='d-flex justify-content-center gap-3 mt-4 flex-column flex-md-row mb-5'>
-  <button className='btn text-white  py-4 px-5 fw-medium rounded-4 fs-5 text-center' style={{ backgroundColor: '#0F9B8D'}}>Join Echostrem</button>
+  <button className='btn text-white  py-4 px-5 fw-medium rounded-4 fs-5 text-center' style={{ backgroundColor: '#0F9B8D'}}  onClick={() => navigate('/signup')}>Join Echostrem</button>
   <button className='btn text-white fw-medium  rounded-4 py-4 px-5' style={{border:'1px solid #bcc9bc'}}>Learn More</button>
 </div>
 </div>

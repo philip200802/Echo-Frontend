@@ -15,6 +15,7 @@
     "bootstrap": "^5.3.8",
     "cls": "^0.1.5",
     "dayjs": "^1.11.21",
+    "formik": "^2.4.9",
     "framer-motion": "^12.43.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

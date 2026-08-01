@@ -5,7 +5,7 @@ import { MdMicExternalOn } from "react-icons/md";
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import {useNavigate} from "react-router-dom";
 
 
 const SignupSchema = Yup.object({
@@ -24,24 +24,45 @@ const SignupSchema = Yup.object({
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Password confirmation is required"),
-});
 
-const signupPage = () => {
-  const formik = useFormik({
-    initialValues: {
-      fullName: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-    },
-    validationSchema: SignupSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    agree: Yup.boolean()
+    .oneOf([true], "You must accept the terms and conditions")
+    .required("You must accept the terms and conditions"),
   });
+  
+  
+  
+  const signupPage = () => {
+  const navigate = useNavigate();
+  
+    const [showPassword, setShowPassword] = useState(false);
+    const[showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+  const formik = useFormik({
+  initialValues: {
+    fullName: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    agree: false,
+  },
+  validationSchema: SignupSchema,
+  onSubmit: async (values) => {
+  try {
+    setLoading(true);
 
-  const [showPassword, setShowPassword] = useState(false);
-  const[showConfirmPassword, setShowConfirmPassword] = useState(false);
+    console.log(values);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+},
+});
+    
+
   return (
     <>
       <div className="d-flex align-items-center gap-2 mt-3">
@@ -62,25 +83,24 @@ const signupPage = () => {
         }}
       >
         <div
-          className="bg-white rounded-5 shadow p-4"
+          className="bg-white rounded-5 shadow p-4 mt-5 mt-md-1"
           style={{
             width: "100%",
             maxWidth: "450px",
             minHeight: "500px",
           }}
         >
-          <h1 className='text-center'>Join the Stre am </h1>
+          <h1 className='text-center'>Join the Stream </h1>
           <p className='text-center '>Experience music like never before.</p>
           <p className='fw-medium text-secondary' style={{ fontSize: '0.8rem' }}>I WANT TO...</p>
           <div className='d-flex  gap-3 mt-3'>
             <button
               className="btn w-50 d-flex flex-column align-items-center p-3"
-              style={{
-                backgroundColor: "#E6F5F3",
-                border: "1px solid #00685F",
-              }}
-            >
-              <MdHeadset size={33} color="#00685F" />
+                                         style={{
+                border: "1px solid #D9E0DE",
+              }} onClick={() => navigate('/listener/signup')} 
+            type="button"> 
+              <MdHeadset size={33} color="#00685F"/>
 
               <p className="fw-medium mb-0 ">
                 Listen
@@ -97,10 +117,12 @@ const signupPage = () => {
               </p>
             </button>
             <button className="btn w-50 d-flex flex-column align-items-center p-3"
-              style={{
-                border: "1px solid #D9E0DE",
-              }}>
-              <MdMicExternalOn size={33} color="#006857" />
+ style={{
+                backgroundColor: "#E6F5F3",
+                border: "1px solid #00685F",
+              }}
+onClick={() => navigate('/artist/signup')} type="button">
+              <MdMicExternalOn size={33} color="#006857"  />
 
               <p className="fw-medium mb-0 ">
                 Share
@@ -209,11 +231,40 @@ const signupPage = () => {
       
     )}
 
-</form>     
-    <div className='d-flex justify-content-center'>
+<div className='d-flex  align-items-center mt-3 mx-2 gap-2'>
+
+<input type='checkbox' name="agree" checked = {formik.values.agree} onChange={formik.handleChange} onBlur= {formik.handleBlur}></input> 
+<span className="fs-6 fw-light">I agree to the     <span className="fw-medium" style={{ color: "#0F9B8D" }}>Terms of Service</span> and    <span className="fw-medium" style={{ color: "#0F9B8D" }}>Privacy Policy </span> </span>
+
+</div>
+{formik.touched.agree && formik.errors.agree && (
+  <div className="text-danger mt-1">
+    {formik.errors.agree}
+  </div>
+)}
+    <div className='d-flex justify-content-center flex-column align-items-center'>
       
-      <button className='btn mt-3 w-50 text-white rounded-5 py-2' style={{backgroundColor: '#0F9B8D'}}  >Create Account</button>
+      <button
+  type="submit"
+  className="btn mt-3 px-2 w-75 text-white rounded-5 py-2 fw-medium"
+  style={{ backgroundColor: "#0F9B8D" }}
+  disabled={loading}
+>
+  {loading ? (
+    <>
+      <span
+        className="spinner-border spinner-border-sm me-2"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Creating Account...
+    </>
+  ) : (
+    "Create an Artist Account"
+  )}
+</button><span> Already have an account? <span className='fw-medium' style={{color: '#0F9B8D'}}>Sign In</span></span>
      </div>
+</form>    
    </div>
       </div>
 

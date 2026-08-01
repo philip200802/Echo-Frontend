@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from "react";
 import { BsSoundwave } from "react-icons/bs";
 import { MdHeadset } from "react-icons/md";
 import { MdMicExternalOn } from "react-icons/md";
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 
@@ -19,6 +20,10 @@ const SignupSchema = Yup.object({
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Password is required"),
+
+  passwordConfirmation: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Password confirmation is required"),
 });
 
 const signupPage = () => {
@@ -27,12 +32,16 @@ const signupPage = () => {
       fullName: "",
       email: "",
       password: "",
+      passwordConfirmation: "",
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
       console.log(values);
     },
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const[showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <>
       <div className="d-flex align-items-center gap-2 mt-3">
@@ -60,7 +69,7 @@ const signupPage = () => {
             minHeight: "500px",
           }}
         >
-          <h1 className='text-center'>Join the Stream </h1>
+          <h1 className='text-center'>Join the Stre am </h1>
           <p className='text-center '>Experience music like never before.</p>
           <p className='fw-medium text-secondary' style={{ fontSize: '0.8rem' }}>I WANT TO...</p>
           <div className='d-flex  gap-3 mt-3'>
@@ -151,40 +160,53 @@ const signupPage = () => {
   </div>
 
     <span className='fs-6 fw-medium'>Password </span>
-  <div className="w-100">
-    <input
-      type="password"
-      name="password"
-      className="form-control rounded-4"
-      placeholder="Enter your password"
-      value={formik.values.password}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-    />
+  <div className="w-100 position-relative">
+  <input
+    type={showPassword ? "text" : "password"}
+    name="password"
+    className="form-control rounded-4 pe-5"
+    placeholder="Enter your password"
+    value={formik.values.password}
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+  />
+
+
 
     {formik.touched.password && formik.errors.password && (
       <div className="text-danger mt-1">
         {formik.errors.password}
       </div>
     )}
+    <button
+    type="button"
+    className="btn position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent"
+    onClick={() => setShowPassword(!showPassword)}
+  >
+    {showPassword ? <FaEyeSlash /> : <FaEye />}
+  </button>
   </div>
     <span className='fs-6 fw-medium'>Confirm Password </span> 
-  <div className="w-100">
+  <div className="w-100 position-relative">
     <input
-      type="email"
-      name="email"
+      type= {showConfirmPassword ? "text" : "password"}
+      name="passwordConfirmation"
       className="form-control rounded-4"
-      placeholder="Enter your email"
-      value={formik.values.email}
+      placeholder="Confirm your password"
+      value={formik.values.passwordConfirmation   }
       onChange={formik.handleChange}
       onBlur={formik.handleBlur}
     />
 
-    {formik.touched.email && formik.errors.email && (
+    {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && (
       <div className="text-danger mt-1">
-        {formik.errors.email}
+        {formik.errors.passwordConfirmation}
       </div>
+      
     )}
+    <button type= 'button' className="btn position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent" onClick={()=> setShowConfirmPassword(!showConfirmPassword)}>
+         {showConfirmPassword ? <FaEyeSlash />:<FaEye/> }
+        </button>
   </div>
 
 </form>     

@@ -172,20 +172,20 @@ const signupPage = () => {
   />
 
 
-
-    {formik.touched.password && formik.errors.password && (
-      <div className="text-danger mt-1">
-        {formik.errors.password}
-      </div>
-    )}
     <button
     type="button"
     className="btn position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent"
     onClick={() => setShowPassword(!showPassword)}
-  >
+    >
     {showPassword ? <FaEyeSlash /> : <FaEye />}
   </button>
+    
   </div>
+        {formik.touched.password && formik.errors.password && (
+          <div className="text-danger mt-1">
+            {formik.errors.password}
+          </div>
+        )}
     <span className='fs-6 fw-medium'>Confirm Password </span> 
   <div className="w-100 position-relative">
     <input
@@ -198,16 +198,16 @@ const signupPage = () => {
       onBlur={formik.handleBlur}
     />
 
+    <button type= 'button' className="btn position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent" onClick={()=> setShowConfirmPassword(!showConfirmPassword)}>
+         {showConfirmPassword ? <FaEyeSlash />:<FaEye/> }
+        </button>
+  </div>
     {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && (
       <div className="text-danger mt-1">
         {formik.errors.passwordConfirmation}
       </div>
       
     )}
-    <button type= 'button' className="btn position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent" onClick={()=> setShowConfirmPassword(!showConfirmPassword)}>
-         {showConfirmPassword ? <FaEyeSlash />:<FaEye/> }
-        </button>
-  </div>
 
 </form>     
     <div className='d-flex justify-content-center'>

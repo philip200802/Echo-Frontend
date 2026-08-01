@@ -45,6 +45,7 @@ const SignupSchema = Yup.object({
     password: "",
     passwordConfirmation: "",
     agree: false,
+    role: "artist",
   },
   validationSchema: SignupSchema,
   onSubmit: async (values) => {
@@ -53,6 +54,12 @@ const SignupSchema = Yup.object({
 
     console.log(values);
     await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    navigate("/signup/confirmation", {
+      state: {
+        email: values.email,
+      },
+    });
 
   } catch (error) {
     console.log(error);

@@ -89,7 +89,7 @@ const LandingPage = () => {
 </div>
 <div className='mt-3 mt-md-4 d-flex gap-4 gap-md-4 flex-column flex-md-row'>
   <button className='btn px-md-5 px-3 py-3  py-md-4 fw-bold text-white fs-6 rounded-4 buttonStart' style= {{backgroundColor: '#0F9B8D'}}  onClick={() => navigate('/listener/signup')}>Start Listening Now</button>
-  <button className='btn px-md-5 px-3 py-3  py-md-3 fw-bold text-white fs-6 rounded-4 buttonExplore' style={{backgroundColor: '#162120'}}>Explore (Artist)</button>
+  <button className='btn px-md-5 px-3 py-3  py-md-3 fw-bold text-white fs-6 rounded-4 buttonExplore' style={{backgroundColor: '#162120'}} onClick={() => navigate('/artist/signup')}>Explore (Artist)</button>
 </div>
 </div>
 <div className='w-100'  style={{backgroundColor: '#E9F4F8'}}>

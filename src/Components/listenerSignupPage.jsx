@@ -34,7 +34,7 @@ const SignupSchema = Yup.object({
   
   const signupPage = () => {
   const navigate = useNavigate();
-  
+
     const [showPassword, setShowPassword] = useState(false);
     const[showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -45,14 +45,21 @@ const SignupSchema = Yup.object({
     password: "",
     passwordConfirmation: "",
     agree: false,
+    role: "listener",
   },
   validationSchema: SignupSchema,
-  onSubmit: async (values) => {
+ onSubmit: async (values) => {
   try {
     setLoading(true);
 
     console.log(values);
     await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    navigate("/signup/confirmation", {
+      state: {
+        email: values.email,
+      },
+    });
 
   } catch (error) {
     console.log(error);

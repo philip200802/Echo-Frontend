@@ -72,6 +72,8 @@ const SignupSchema = Yup.object({
 
   return (
     <>
+    <div className="d-none d-lg-block">
+
       <div className="d-flex align-items-center gap-2 mt-3">
         <BsSoundwave size={35} color="#00685F" />
 
@@ -82,6 +84,7 @@ const SignupSchema = Yup.object({
           EchoStream
         </div>
       </div>
+    </div>
       <div
         className="container-fluid d-flex justify-content-center align-items-center"
         style={{
@@ -269,7 +272,8 @@ const SignupSchema = Yup.object({
   ) : (
     "Create Account"
   )}
-</button><span> Already have an account? <span className='fw-medium' style={{color: '#0F9B8D'}}>Sign In</span></span>
+</button>
+<span> Already have an account? <span className='fw-medium' style={{color: '#0F9B8D'}} onClick={() => navigate('/listener/signin')}>Sign In</span></span>
      </div>
 </form>    
    </div>

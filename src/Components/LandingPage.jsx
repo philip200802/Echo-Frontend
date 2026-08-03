@@ -39,7 +39,7 @@ const LandingPage = () => {
   <div className="d-flex align-items-center gap-1 gap-md-2 flex-shrink-0">
     <button
       className="btn btn-light rounded-pill fw-bold px-2 px-md-4 py-1 py-md-2"
-      style={{ color: "#00685F", fontSize: "clamp(1rem, 2vw, 1.2  rem)" }}
+      style={{ color: "#00685F", fontSize: "clamp(1rem, 2vw, 1.2  rem)" }} onClick={() => navigate('/listener/signin')}
     >
       Sign In
     </button>
@@ -223,7 +223,7 @@ const LandingPage = () => {
       <span className=' fw-bolder fs-5 px-4 py-3 position-absolute' style= {{ bottom: "35px",
       left: "25px", zIndex: 2,color:'#0F9B8D' }}>Indie Electronic<br/> <span style={{}} className='fw-bold text-white fs-6'>Luna Ray</span></span>
 <button className='position-absolute px-3 btn py-2 text-white fw-medium button2 align-items-center d-flex gap-1 rounded-3' style= {{ bottom: "5px",
-      left: "30px", zIndex: 2,backgroundColor:'#0F9B8D' }}><FaPlay />Listen now</button>
+      left: "30px", zIndex: 2,backgroundColor:'#0F9B8D' }} onClick={()=> navigate('/listener/signup')}><FaPlay />Listen now</button>
   
     </div>
 
@@ -241,7 +241,7 @@ const LandingPage = () => {
       left: "25px", zIndex: 2,color:'#0F9B8D' }}>Cyberpop<br/> <span style={{}} className='fw-bold text-white fs-6'>Synthia</span>
      </span>
       <button className='position-absolute px-3 btn py-2 text-white fw-medium button2 align-items-center d-flex gap-1 rounded-3' style= {{ bottom: "5px",
-      left: "30px", zIndex: 2,backgroundColor:'#0F9B8D' }}><FaPlay />Listen now</button>
+      left: "30px", zIndex: 2,backgroundColor:'#0F9B8D' }} onClick={()=> navigate('/listener/signup')}><FaPlay />Listen now</button>
   
 
     </div>
@@ -260,7 +260,7 @@ const LandingPage = () => {
       left: "25px", zIndex: 2,color:'#0F9B8D' }}>
 Folk Revival<br/> <span style={{}} className='fw-bold text-white fs-6'>Arlo Gray</span></span>
 <button className='position-absolute px-3 btn py-2 text-white fw-medium button2 align-items-center d-flex gap-1 rounded-3' style= {{ bottom: "5px",
-      left: "30px", zIndex: 2,backgroundColor:'#0F9B8D' }}><FaPlay />Listen now</button>
+      left: "30px", zIndex: 2,backgroundColor:'#0F9B8D' }} onClick={() => navigate('/listener/signup')}><FaPlay />Listen now</button>
   
     </div>
   </div>

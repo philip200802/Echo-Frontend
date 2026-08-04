@@ -32,3 +32,23 @@
 .signButton:hover{
 transform: translateX(1px);
 }
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #555;
+  padding: 12px 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #E6F4F1;
+  color: #00685F;
+}
+
+.sidebar-link.active {
+  background-color: #00685F;
+  color: white;
+}

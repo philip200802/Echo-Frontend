@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const SignupSchema = Yup.object({
@@ -272,7 +273,7 @@ const signupPage = () => {
                 ) : (
                   "Create an Artist Account"
                 )}
-              </button><span> Already have an account? <span className='fw-medium' style={{ color: '#0F9B8D' }} onClick={() => navigate('/artist/signin')}>Sign In</span></span>
+              </button><span> Already have an account? <Link to='/artist/signin' className='fw-medium text-decoration-none' style={{ color: '#0F9B8D' }}>Sign In</Link></span>
             </div>
           </form>
         </div>

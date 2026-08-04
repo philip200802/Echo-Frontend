@@ -3,6 +3,7 @@ import { BsSoundwave } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
+import { Link } from 'react-router-dom';
 
 const SigninSchema =Yup.object({
     email: Yup.string()
@@ -97,7 +98,7 @@ onSubmit:(values)=>{
                     <div className='mt-4 d-flex justify-content-center'>
                     <button className='btn text-white fs-medium w-50 d-flex justify-content-center' type ='submit' style={{backgroundColor: "#00685F"}}>Sign in</button>
                     </div>
-                    <p className='d-flex mt-2 justify-content-center align-items-center gap-2'>Don't have an account? <span className='fw-medium ' style={{color:'#00685F'}} onClick={() => navigate('/artist/signup')}> Sign up</span></p>
+                    <p className='d-flex mt-2 justify-content-center align-items-center gap-2'>Don't have an account? <Link className='fw-medium text-decoration-none' style={{color:'#00685F'}} to='/artist/signup'> Sign up</Link></p>
                 </form>
             </div>
 

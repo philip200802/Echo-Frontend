@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import { FaArrowRight } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const SigninSchema =Yup.object({
     email: Yup.string()
@@ -100,7 +101,7 @@ onSubmit:(values)=>{
                     <button className='btn text-white fs-medium w-50 d-flex justify-content-center align-items-center gap-2' type ='submit' style={{backgroundColor: "#00685F"}}>Sign in      <FaArrowRight className='mt-1 signButton'/>
                     </button>
                     </div>
-                    <p className='d-flex mt-2 justify-content-center align-items-center gap-2'>Don't have an account? <span className='fw-medium cursor-pointer ' style={{color:'#00685F'}} onClick={() => navigate('/listener/signup')}> Sign up</span></p>
+                    <p className='d-flex mt-2 justify-content-center align-items-center gap-2 '>Don't have an account? <Link to='/listener/signup' className='fw-medium text-decoration-none ' style={{color:'#00685F'}} > Sign up</Link></p>
                 </form>
             </div>
 

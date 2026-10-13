@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { BsCheckLg, BsEnvelope, BsEye, BsEyeSlash, BsSoundwave } from "react-icons/bs";
+import { BsCheckLg, BsEnvelope, BsExclamationTriangle, BsEye, BsEyeSlash, BsSoundwave } from "react-icons/bs";
 import "../styles/public.css";
 
 const legalSections = {
@@ -69,7 +69,17 @@ function AuthShell({ children }) {
 }
 
 export function EmailVerifiedPage() {
+  const location = useLocation();
+
+  if (new URLSearchParams(location.search).get("verified") === "false") {
+    return <EmailNotVerifiedPage />;
+  }
+
   return <AuthShell><div className="public-card p-4 p-md-5 text-center" style={{ maxWidth: 520 }}><div className="rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style={{ width: 82, height: 82, background: "#e3f5ef", color: "#00685f" }}><BsCheckLg size={42} aria-hidden="true" /></div><h1 className="h2 fw-bold">Email verified successfully!</h1><p className="text-secondary my-3">Your email address has been verified. You're all set to enjoy your music on EchoStream.</p><Link className="btn public-btn rounded-pill w-100 py-3 mt-2" to="/listener/signin">Continue to Sign In</Link><Link className="public-link d-inline-block mt-3" to="/">Go to Homepage</Link></div></AuthShell>;
+}
+
+export function EmailNotVerifiedPage() {
+  return <AuthShell><div className="public-card p-4 p-md-5 text-center" style={{ maxWidth: 520 }}><div className="rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style={{ width: 82, height: 82, background: "#fff1f0", color: "#dc3545" }}><BsExclamationTriangle size={40} aria-hidden="true" /></div><h1 className="h2 fw-bold">Email verification failed</h1><div className="alert alert-danger text-start" role="alert">Your email address could not be verified. The link may be invalid or expired.</div><p className="text-secondary my-3">Please request a new verification email and try again.</p><Link className="btn public-btn rounded-pill w-100 py-3 mt-2" to="/listener/signup">Create an Account</Link><Link className="public-link d-inline-block mt-3" to="/listener/signin">Back to Sign In</Link></div></AuthShell>;
 }
 
 export function ForgotPasswordPage() {

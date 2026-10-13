@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaArrowRight } from "react-icons/fa6";
 import { BsSoundwave } from "react-icons/bs";
 import { HiSparkles } from "react-icons/hi2";
@@ -11,7 +10,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 import { BsGlobeAmericasFill } from "react-icons/bs";
 import { CiVideoOn } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
-import  {useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 

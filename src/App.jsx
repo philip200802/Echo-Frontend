@@ -18,7 +18,7 @@ import ArtistDashboard from './pages/Artist/ArtistDashboard'
 import { ArtistSearch, ArtistLibrary, ArtistUpload, ArtistAnalytics, ArtistSettings } from './pages/Artist/ArtistPages'
 import AdminLayout from './layouts/adminLayout'
 import { AdminDashboard, AdminUsers, AdminLibrary, AdminAnalytics, AdminSettings } from './pages/Admin/AdminPages'
-import { EmailVerifiedPage, ForgotPasswordPage, ForgotPasswordStatusPage, PrivacyPage, ResetPasswordPage, TermsPage } from "./pages/PublicPages";
+import { EmailNotVerifiedPage, EmailVerifiedPage, ForgotPasswordPage, ForgotPasswordStatusPage, PrivacyPage, ResetPasswordPage, TermsPage } from "./pages/PublicPages";
 
 
 function App() {
@@ -37,6 +37,7 @@ function App() {
       <Route path="/forgot-password/status" element={<ForgotPasswordStatusPage />} />
       <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
       <Route path="/email-verified" element={<EmailVerifiedPage />} />
+      <Route path="/email-not-verified" element={<EmailNotVerifiedPage />} />
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/privacy-policy" element={<PrivacyPage />} />
       <Route path="/listener/dashboard" element={<ListenerLayout />}>

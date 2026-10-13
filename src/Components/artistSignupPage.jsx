@@ -245,7 +245,7 @@ const signupPage = () => {
             <div className='d-flex  align-items-center mt-3 mx-2 gap-2'>
 
               <input type='checkbox' name="agree" checked={formik.values.agree} onChange={formik.handleChange} onBlur={formik.handleBlur}></input>
-              <span className="fs-6 fw-light">I agree to the     <span className="fw-medium" style={{ color: "#0F9B8D" }}>Terms of Service</span> and    <span className="fw-medium" style={{ color: "#0F9B8D" }}>Privacy Policy </span> </span>
+              <span className="fs-6 fw-light">I agree to the <Link className="fw-medium text-decoration-none" style={{ color: "#0F9B8D" }} to="/terms">Terms of Service</Link> and <Link className="fw-medium text-decoration-none" style={{ color: "#0F9B8D" }} to="/privacy-policy">Privacy Policy</Link></span>
 
             </div>
             {formik.touched.agree && formik.errors.agree && (

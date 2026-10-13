@@ -426,8 +426,8 @@ you listen?
       <h5 style={{color: '#0F9B8D'}} className='fw-bold mb-3'>Support</h5>
       <p className='fw-medium'>Help Center</p>
       <p className='fw-medium'>Community</p>
-      <p className='fw-medium'>Privacy Policy</p>
-      <p className='fw-medium'>Terms of Service</p>
+      <Link className='fw-medium text-decoration-none text-dark d-block' to="/privacy-policy">Privacy Policy</Link>
+      <Link className='fw-medium text-decoration-none text-dark d-block' to="/terms">Terms of Service</Link>
     </div>
   </div>
 

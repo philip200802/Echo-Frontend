@@ -1,4 +1,3 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { BsSoundwave } from "react-icons/bs";
 import {
@@ -7,66 +6,56 @@ import {
   MdSearch,
   MdPlaylistPlay,
   MdFavorite,
-  MdSettings,   
+  MdSettings,
 } from "react-icons/md";
-import { FiLogOut } from "react-icons/fi";
+
+const navigationItems = [
+  { to: "/listener/dashboard", label: "Home", icon: MdHomeFilled, end: true },
+  { to: "/listener/dashboard/discover", label: "Discover", icon: MdExplore },
+  { to: "/listener/dashboard/search", label: "Search", icon: MdSearch },
+  { to: "/listener/dashboard/playlist", label: "Playlist", icon: MdPlaylistPlay },
+  { to: "/listener/dashboard/favourites", label: "Liked Songs", icon: MdFavorite },
+  { to: "/listener/dashboard/settings", label: "Settings", icon: MdSettings },
+];
+
+const SidebarLinks = ({ mobile = false }) => (
+  <div className={mobile ? "sidebar-mobile-links" : "sidebar-links"}>
+    {navigationItems.map(({ to, label, icon: Icon, end }) => (
+      <NavLink
+        key={to}
+        to={to}
+        end={end}
+        className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
+        title={label}
+      >
+        <Icon size={mobile ? 23 : 22} />
+        <span>{label}</span>
+      </NavLink>
+    ))}
+  </div>
+);
+
 const Sidebar = () => {
   return (
     <>
-      <div style={{height: '99.9vh', width: '13vw',}} className='d-flex flex-column align-items-center bg-white'>
-         <div className="d-flex align-items-center gap-2 ">
-            <BsSoundwave size={35} color="#00685F" />
-        
-            <div
-              className="navbar-brand mb-0 fw-bold fs-3  fs-md-6"
-              style={{ color: "#00685F" }}
-            >
-              EchoStream
-            </div>
+      <aside className="sidebar-desktop">
+        <div className="sidebar-brand">
+          <span className="sidebar-brand-mark"><BsSoundwave size={25} /></span>
+          <div>
+            <div className="sidebar-brand-name">EchoStream</div>
+            <div className="sidebar-brand-subtitle">Premium Audio</div>
           </div>
-            <div className='fw-medium d-flex text-start'>Premuim Audio</div>
-        <div className="d-flex mx-5 flex-column mt-3 gap-3" style={{width: '100%'}}>
-
-        <NavLink
-  to="/listener/dashboard"className={({ isActive }) =>`sidebar-link ${isActive ? "active" : ""}`}><MdHomeFilled size={30} /> <span>Home</span>
-</NavLink>
-   
-   <NavLink
-  to="/listener/dashboard/discover"className={({ isActive }) =>`sidebar-link ${isActive ? "active" : ""}`}><MdExplore size={30} /> <span>Discover</span>
-</NavLink>
-<NavLink
-  to="/listener/dashboard/search"className={({ isActive }) =>`sidebar-link ${isActive ? "active" : ""}`}><MdSearch size={30} /> <span>Search</span>
-</NavLink>
-<NavLink
-  to="/listener/dashboard/playlist"className={({ isActive }) =>`sidebar-link ${isActive ? "active" : ""}`}><MdPlaylistPlay size={30} /> <span>Playlist</span>
-</NavLink>
-<NavLink
-  to="/listener/dashboard/favourites"className={({ isActive }) =>`sidebar-link ${isActive ? "active" : ""}`}><MdFavorite size={25} /> <span>Liked Songs</span>
-</NavLink>
-
-<div className=''>
-  <span className='fs-6 mx-3 text-secondary d-flex gap-3'>ACCOUNT</span>
-  <NavLink
-  to="/listener/dashboard/settings"className={({ isActive }) =>`sidebar-link ${isActive ? "active" : ""}`}><MdSettings size={25} /> <span>Settings</span>
-</NavLink>
- <NavLink
-  to="/listener/signin"className={({ isActive }) =>`sidebar-link ${isActive ? "active" : ""}`}><FiLogOut size={25} /> <span>Logout</span>
-</NavLink>
-
-</div>
-  </div>
-
-
-
-    </div>
-    <div
-  className="d-flex flex-column align-items-center bg-white"
-  style={{
-    height: "100vh",
-    width: "13vw",
-    borderLeft: "1px solid #C4CFCC",
-  }}
-></div>
+        </div>
+        <div className="sidebar-section-label">Explore</div>
+        <SidebarLinks />
+        <div className="sidebar-now-playing">
+          <span className="sidebar-now-playing-dot" />
+          <div><strong>Good listening</strong><small>Your sound, your space.</small></div>
+        </div>
+      </aside>
+      <nav className="sidebar-mobile" aria-label="Mobile navigation">
+        <SidebarLinks mobile />
+      </nav>
     </>
   )
 }

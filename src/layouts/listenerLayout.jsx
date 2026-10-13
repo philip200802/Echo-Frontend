@@ -1,18 +1,23 @@
+import { Outlet } from "react-router-dom";
+import Sidebar from "../Components/Sidebar";
+import Topbar from "../Components/Topbar";
 
-import { Outlet } from 'react-router-dom';
-import Sidebar from '../Components/Sidebar';
+const ListenerLayout = () => {
+  return (
+    <div className="d-flex">
+      <Sidebar />
 
-const listenerLayout = () => {
-    return(
-<div className='d-flex'>
-    <Sidebar />
-    <h1>Am a boy</h1>
-<Outlet />
-</div>
-)
+      <main
+        className="listener-main flex-grow-1"
+      >
+        <Topbar />
+        <div className='p-4'>
+          <Outlet />
 
-    
-}
+        </div>
+      </main>
+    </div>
+  );
+};
 
-export default listenerLayout
-
+export default ListenerLayout;  

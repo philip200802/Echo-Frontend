@@ -84,7 +84,7 @@ onSubmit:(values)=>{
 
                     </div>
 
-                    <span className='mx-4 fw-medium mt-3 d-flex justify-content-between'>Password <span className='fw-normal' style= {{color: '#00685F', fontSize: '0.8rem'}} onClick={()=> navigate('/forgot/password') }>Forgot password?</span></span>
+                    <span className='mx-4 fw-medium mt-3 d-flex justify-content-between'>Password <span className='fw-normal' style= {{color: '#00685F', fontSize: '0.8rem', cursor: 'pointer'}} onClick={()=> navigate('/forgot-password') }>Forgot password?</span></span>
                     <div className='mx-4 mt-1' >
                     <input type="password" name='password'  className=' form-control fw-medium' placeholder='Enter your password ' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password}/>
                         {formik.touched.password && formik.errors.password && (

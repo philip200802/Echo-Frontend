@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { BsCheckLg, BsEnvelope, BsExclamationTriangle, BsEye, BsEyeSlash, BsSoundwave } from "react-icons/bs";
+import axios from "axios";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { BsCheckLg, BsExclamationTriangle, BsEye, BsEyeSlash, BsSoundwave } from "react-icons/bs";
 import "../styles/public.css";
 
 const legalSections = {
@@ -82,30 +83,6 @@ export function EmailNotVerifiedPage() {
   return <AuthShell><div className="public-card p-4 p-md-5 text-center" style={{ maxWidth: 520 }}><div className="rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style={{ width: 82, height: 82, background: "#fff1f0", color: "#dc3545" }}><BsExclamationTriangle size={40} aria-hidden="true" /></div><h1 className="h2 fw-bold">Email verification failed</h1><div className="alert alert-danger text-start" role="alert">Your email address could not be verified. The link may be invalid or expired.</div><p className="text-secondary my-3">Please request a new verification email and try again.</p><Link className="btn public-btn rounded-pill w-100 py-3 mt-2" to="/listener/signup">Create an Account</Link><Link className="public-link d-inline-block mt-3" to="/listener/signin">Back to Sign In</Link></div></AuthShell>;
 }
 
-export function ForgotPasswordPage() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  function submit(event) {
-    event.preventDefault();
-    setError("");
-    navigate("/forgot-password/status", { state: { email } });
-  }
-  return <AuthShell><div className="public-card p-4 p-md-5 w-100" style={{ maxWidth: 480 }}><div className="text-center"><div className="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: 72, height: 72, background: "#e3f5ef", color: "#00685f" }}><BsEnvelope size={35} aria-hidden="true" /></div><h1 className="h2 fw-bold">Forgot your password?</h1><p className="text-secondary">Enter your email address and we'll show the next step in the password reset flow.</p></div><form onSubmit={submit} noValidate><label className="form-label fw-semibold" htmlFor="forgot-email">Email address</label><input id="forgot-email" className="form-control rounded-3 py-2" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required autoComplete="email" placeholder="name@example.com" /><button className="btn public-btn rounded-pill w-100 py-3 mt-4" disabled={!email}>Continue</button>{error && <div className="alert alert-danger mt-3 mb-0" role="alert">{error}</div>}</form><div className="text-center mt-4"><Link className="public-link" to="/listener/signin">Back to Sign In</Link></div></div></AuthShell>;
-}
-
-function maskEmail(email) {
-  if (!email || !email.includes("@")) return "";
-  const [name, domain] = email.split("@");
-  return `${name.slice(0, 1)}***@${domain}`;
-}
-
-export function ForgotPasswordStatusPage() {
-  const location = useLocation();
-  const email = location.state?.email;
-  return <AuthShell><div className="public-card p-4 p-md-5 text-center w-100" style={{ maxWidth: 480 }}><div className="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: 72, height: 72, background: "#e3f5ef", color: "#00685f" }}><BsEnvelope size={35} aria-hidden="true" /></div><h1 className="h2 fw-bold">Check Your Email</h1><p className="text-secondary">If an account exists for the email address you entered, we'll send instructions to reset your password.</p>{email && <p className="fw-semibold">{maskEmail(email)}</p>}<div className="alert alert-light border text-secondary text-start mt-4">Check your inbox and spam folder. Reset links expire after 15 minutes.</div><Link className="btn public-btn rounded-pill w-100 py-3 mt-2" to="/listener/signin">Back to Sign In</Link><Link className="public-link d-inline-block mt-3" to="/forgot-password">Try Again</Link></div></AuthShell>;
-}
-
 export function ResetPasswordPage() {
   const { token } = useParams();
   const [password, setPassword] = useState("");
@@ -121,10 +98,21 @@ export function ResetPasswordPage() {
     if (!validLength) return setStatus({ type: "error", message: "Your password must be at least 8 characters." });
     if (!matches) return setStatus({ type: "error", message: "Passwords must match." });
     setStatus({ type: "", message: "" });
-    setStatus({ type: "success", message: "Your password has been reset successfully." });
+
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/auth/reset-password/${token}`,
+        { newPassword: password }
+      );
+      setStatus({ type: "success", message: "Your password has been reset successfully." });
+    } catch (error) {
+      const message = error.response?.data?.message || "We could not reset your password. Please request a new reset link and try again.";
+      setStatus({ type: "error", message });
+    }
   }
-  return <AuthShell><div className="public-card p-4 p-md-5 w-100" style={{ maxWidth: 480 }}><h1 className="h2 fw-bold">Create a New Password</h1><p className="text-secondary">Choose a strong password to secure your EchoStream account.</p>{status.message && <div className={`alert alert-${status.type === "success" ? "success" : "danger"}`} role="alert">{status.message}</div>}{status.type === "success" ? <Link className="btn public-btn rounded-pill w-100 py-3" to="/listener/signin">Return to Sign In</Link> : <form onSubmit={submit}><label className="form-label fw-semibold" htmlFor="new-password">New password</label><div className="input-group mb-2"><input id="new-password" className="form-control" type={showPassword ? "text" : "password"} value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="new-password" required /><button className="btn btn-outline-secondary" type="button" aria-label={showPassword ? "Hide password" : "Show password"} onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button></div><div className={`password-requirement ${validLength ? "valid" : ""}`}>• At least 8 characters</div><label className="form-label fw-semibold mt-3" htmlFor="confirm-password">Confirm new password</label><div className="input-group"><input id="confirm-password" className="form-control" type={showConfirmation ? "text" : "password"} value={confirmation} onChange={(event) => setConfirmation(event.target.value)} autoComplete="new-password" required /><button className="btn btn-outline-secondary" type="button" aria-label={showConfirmation ? "Hide confirmation" : "Show confirmation"} onClick={() => setShowConfirmation(!showConfirmation)}>{showConfirmation ? <BsEyeSlash /> : <BsEye />}</button></div><div className={`password-requirement ${matches ? "valid" : ""}`}>• Passwords must match</div><button className="btn public-btn rounded-pill w-100 py-3 mt-4" disabled={!password || !confirmation}>Reset Password</button></form>}<div className="text-center mt-4"><Link className="public-link" to="/listener/signin">Back to Sign In</Link></div></div></AuthShell>;
+  return <AuthShell><div className="public-card p-4 p-md-5 w-100" style={{ maxWidth: 480 }}><h1 className="h2 fw-bold">Create a New Password</h1><p className="text-secondary">Choose a strong password to secure your EchoStream account.</p>{status.message && <div className={`alert alert-${status.type === "success" ? "success" : "danger"}`} role="alert">{status.message}</div>}{status.type === "success" ? <Link className="btn public-btn rounded-pill w-100 py-3" to="/listener/signin">Return to Sign In</Link> : <form onSubmit={submit}><label className="form-label fw-semibold" htmlFor="new-password">New password</label><div className="input-group mb-2"><input id="new-password" className="form-control" type={showPassword ? "text" : "password"} value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="new-password" required /><button className="btn btn-outline-secondary" type="button" aria-label={showPassword ? "Hide password" : "Show password"} onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button></div><div className={`password-requirement ${validLength ? "valid" : ""}`}>• At least 8 characters</div><label className="form-label fw-semibold mt-3" htmlFor="confirm-password">Confirm new password</label><div className="input-group"><input id="confirm-password" className="form-control" type={showConfirmation ? "text" : "password"} value={confirmation} onChange={(event) => setConfirmation(event.target.value)} autoComplete="new-password" required /><button className="btn btn-outline-secondary" type="button" aria-label={showConfirmation ? "Hide confirmation" : "Show confirmation"} onClick={() => setShowConfirmation(!showConfirmation)}>{showConfirmation ? <BsEyeSlash /> : <BsEye />}</button></div><div className={`password-requirement ${matches ? "valid" : ""}`}>• Passwords must match</div><button type="submit" className="btn public-btn rounded-pill w-100 py-3 mt-4" style={{ backgroundColor: "#00685F", borderColor: "#00685F" }} disabled={!password || !confirmation}>Reset Password</button></form>}<div className="text-center mt-4"><Link className="public-link" to="/listener/signin">Back to Sign In</Link></div></div></AuthShell>;
 }
+
 
 export const TermsPage = () => <LegalPage type="terms" />;
 export const PrivacyPage = () => <LegalPage type="privacy" />;

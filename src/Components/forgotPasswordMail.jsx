@@ -1,12 +1,10 @@
-import React from 'react'
 import { BsSoundwave } from "react-icons/bs";
-import { CiMail } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
 
-const forgotPasswordMail = () => {
+const ForgotPasswordMail = () => {
   const navigate = useNavigate();
   const forgotSchema = Yup.object({
     email: Yup.string()
@@ -82,7 +80,7 @@ return (
         <button
           className="btn w-100 rounded-pill py-3 mt-4 text-white fw-semibold"
           style={{ backgroundColor: "#00685F" }}
-          onClick={() => navigate('/forgot/confirmation')} type='submit'>
+          type='submit'>
           Send Reset Link        </button>
         </form>
 
@@ -101,4 +99,4 @@ return (
 )
 }
 
-export default forgotPasswordMail
+export default ForgotPasswordMail

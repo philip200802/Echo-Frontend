@@ -1,13 +1,13 @@
-import React from 'react'
 import { BsSoundwave } from "react-icons/bs";
 import { CiMail } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-const forgotMailConfirmation = () => {
+const ForgotMailConfirmation = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const email = state?.email||'Your email address'
+    const token = state?.token;
   return (
     <>
         <div className='d-none d-md-block'>
@@ -69,9 +69,17 @@ const forgotMailConfirmation = () => {
 <button
   className="btn w-100 rounded-pill py-3 mt-4 text-white fw-semibold"
   style={{ backgroundColor: "#00685F" }}
-onClick={() => navigate('/listener/signup')}>
-  Back to Sign Up
+onClick={() => navigate('/listener/signin')}>
+  Back to Sign In
 </button>
+{token && (
+  <button
+    className="btn btn-outline-success w-100 rounded-pill py-3 mt-3 fw-semibold"
+    onClick={() => navigate(`/reset-password/${token}`)}
+  >
+    Continue to Reset Password
+  </button>
+)}
 
 <div className="text-center mt-4">
   <p className="text-secondary mb-1">
@@ -81,6 +89,7 @@ onClick={() => navigate('/listener/signup')}>
   <button
     className="btn p-0 fw-semibold"
     style={{ color: "#00685F" }}
+    onClick={() => navigate('/forgot/password')}
   >
     Resend Link
   </button>
@@ -91,4 +100,4 @@ onClick={() => navigate('/listener/signup')}>
   )
 }
 
-export default forgotMailConfirmation
+export default ForgotMailConfirmation

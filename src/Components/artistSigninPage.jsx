@@ -1,4 +1,3 @@
-import React from 'react'
 import { BsSoundwave } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup'
@@ -15,7 +14,7 @@ const SigninSchema =Yup.object({
         .required("Password is required"),
 
 } )
-const listenerSigninPage = () => {
+const ArtistSigninPage = () => {
     const navigate = useNavigate()
     
     const formik = useFormik({
@@ -85,7 +84,7 @@ onSubmit:(values)=>{
 
                     </div>
 
-                    <span className='mx-4 fw-medium mt-3 d-flex justify-content-between'>Password <span className='fw-normal' style= {{color: '#00685F', fontSize: '0.8rem', cursor: 'pointer'}} onClick={()=> navigate('/forgot-password') }>Forgot password?</span></span>
+                    <span className='mx-4 fw-medium mt-3 d-flex justify-content-between'>Password <span className='fw-normal' style= {{color: '#00685F', fontSize: '0.8rem', cursor: 'pointer'}} onClick={()=> navigate('/forgot/password') }>Forgot password?</span></span>
                     <div className='mx-4 mt-1' >
                     <input type="password" name='password'  className=' form-control fw-medium' placeholder='Enter your password ' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password}/>
                         {formik.touched.password && formik.errors.password && (
@@ -107,4 +106,4 @@ onSubmit:(values)=>{
     )
 }
 
-export default listenerSigninPage
+export default ArtistSigninPage
